@@ -28,7 +28,7 @@
 
 						</ul>
 
-						<!--  -->
+						{{--<!--  -->
 						<h4 class="m-text14 p-b-32">
 							Filters
 						</h4>
@@ -105,14 +105,14 @@
 							<button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
 								<i class="fs-12 fa fa-search" aria-hidden="true"></i>
 							</button>
-						</div>
+						</div>--}}
 					</div>
 				</div>
 
 				<div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
 					<!--  -->
 					<div class="flex-sb-m flex-w p-b-35">
-						<div class="flex-w">
+					{{--	<div class="flex-w">
 							<div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
 								<select class="selection-2" name="sorting">
 									<option>Default Sorting</option>
@@ -137,7 +137,7 @@
 
 						<span class="s-text8 p-t-5 p-b-5">
 							Showing 1–12 of 16 results
-						</span>
+						</span>--}}
 					</div>
 
 					<!-- Product -->
