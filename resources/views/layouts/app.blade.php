@@ -159,10 +159,6 @@
                            </li>--}}
 
                            <li>
-                               <a href="{{url('blog')}}">Blog</a>
-                           </li>
-
-                           <li>
                                <a href="{{url('blog')}}">About</a>
                            </li>
 
@@ -184,7 +180,7 @@
                        @else
                            <li class="dropdown">
                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                   {{ Auth::user()->name }} <span class="caret"></span>
+                                   {{ Auth::user()->name }}
                                </a>
 
                                <ul class="dropdown-menu" role="menu">
@@ -198,62 +194,17 @@
 
                    <div class="header-wrapicon2">
                        <img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                       <span class="header-icons-noti">0</span>
+
 
                        <!-- Header cart noti -->
                        <div class="header-cart header-dropdown">
                            <ul class="header-cart-wrapitem">
-                               <li class="header-cart-item">
-                                   <div class="header-cart-item-img">
-                                       <img src="images/item-cart-01.jpg" alt="IMG">
-                                   </div>
 
-                                   <div class="header-cart-item-txt">
-                                       <a href="#" class="header-cart-item-name">
-                                           White Shirt With Pleat Detail Back
-                                       </a>
 
-                                       <span class="header-cart-item-info">
-											1 x $19.00
-										</span>
-                                   </div>
-                               </li>
-
-                               <li class="header-cart-item">
-                                   <div class="header-cart-item-img">
-                                       <img src="images/item-cart-02.jpg" alt="IMG">
-                                   </div>
-
-                                   <div class="header-cart-item-txt">
-                                       <a href="#" class="header-cart-item-name">
-                                           Converse All Star Hi Black Canvas
-                                       </a>
-
-                                       <span class="header-cart-item-info">
-											1 x $39.00
-										</span>
-                                   </div>
-                               </li>
-
-                               <li class="header-cart-item">
-                                   <div class="header-cart-item-img">
-                                       <img src="images/item-cart-03.jpg" alt="IMG">
-                                   </div>
-
-                                   <div class="header-cart-item-txt">
-                                       <a href="#" class="header-cart-item-name">
-                                           Nixon Porter Leather Watch In Tan
-                                       </a>
-
-                                       <span class="header-cart-item-info">
-											1 x $17.00
-										</span>
-                                   </div>
-                               </li>
                            </ul>
 
                            <div class="header-cart-total">
-                               Total: $75.00
+                               Total: {{Cart::subTotal()}}
                            </div>
 
                            <div class="header-cart-buttons">
@@ -264,12 +215,6 @@
                                    </a>
                                </div>
 
-                               <div class="header-cart-wrapbtn">
-                                   <!-- Button -->
-                                   <a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-                                       Check Out
-                                   </a>
-                               </div>
                            </div>
                        </div>
                    </div>
@@ -296,62 +241,17 @@
 
                    <div class="header-wrapicon2">
                        <img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-                       <span class="header-icons-noti">0</span>
+
 
                        <!-- Header cart noti -->
                        <div class="header-cart header-dropdown">
                            <ul class="header-cart-wrapitem">
-                               <li class="header-cart-item">
-                                   <div class="header-cart-item-img">
-                                       <img src="images/item-cart-01.jpg" alt="IMG">
-                                   </div>
 
-                                   <div class="header-cart-item-txt">
-                                       <a href="#" class="header-cart-item-name">
-                                           White Shirt With Pleat Detail Back
-                                       </a>
 
-                                       <span class="header-cart-item-info">
-											1 x $19.00
-										</span>
-                                   </div>
-                               </li>
-
-                               <li class="header-cart-item">
-                                   <div class="header-cart-item-img">
-                                       <img src="images/item-cart-02.jpg" alt="IMG">
-                                   </div>
-
-                                   <div class="header-cart-item-txt">
-                                       <a href="#" class="header-cart-item-name">
-                                           Converse All Star Hi Black Canvas
-                                       </a>
-
-                                       <span class="header-cart-item-info">
-											1 x $39.00
-										</span>
-                                   </div>
-                               </li>
-
-                               <li class="header-cart-item">
-                                   <div class="header-cart-item-img">
-                                       <img src="images/item-cart-03.jpg" alt="IMG">
-                                   </div>
-
-                                   <div class="header-cart-item-txt">
-                                       <a href="#" class="header-cart-item-name">
-                                           Nixon Porter Leather Watch In Tan
-                                       </a>
-
-                                       <span class="header-cart-item-info">
-											1 x $17.00
-										</span>
-                                   </div>
-                               </li>
                            </ul>
 
                            <div class="header-cart-total">
-                               Total: $75.00
+                               Total: ${{Cart::subTotal()}}
                            </div>
 
                            <div class="header-cart-buttons">
@@ -397,12 +297,7 @@
 								fashe@example.com
 							</span>
 
-                           <div class="topbar-language rs1-select2">
-                               <select class="selection-1" name="time">
-                                   <option>USD</option>
-                                   <option>EUR</option>
-                               </select>
-                           </div>
+
                        </div>
                    </li>
 
@@ -428,9 +323,9 @@
                        <a href="{{url('product')}}">Shop</a>
                    </li>
 
-                   <li class="item-menu-mobile">
+                {{--   <li class="item-menu-mobile">
                        <a href="{{url('blog')}}">Blog</a>
-                   </li>
+                   </li>--}}
 
                    <li class="item-menu-mobile">
                        <a href="{{url('about')}}">About</a>
@@ -443,6 +338,8 @@
            </nav>
        </div>
    </header>
+
+
     @yield('content')
    <!-- Footer -->
    <footer class="bg6 p-t-45 p-b-43 p-l-45 p-r-45">
@@ -473,29 +370,14 @@
                </h4>
 
                <ul>
+                   @foreach($categories as $category)
                    <li class="p-b-9">
                        <a href="#" class="s-text7">
-                           Men
+                           {{$category->name}}
                        </a>
                    </li>
+                       @endforeach
 
-                   <li class="p-b-9">
-                       <a href="#" class="s-text7">
-                           Women
-                       </a>
-                   </li>
-
-                   <li class="p-b-9">
-                       <a href="#" class="s-text7">
-                           Dresses
-                       </a>
-                   </li>
-
-                   <li class="p-b-9">
-                       <a href="#" class="s-text7">
-                           Sunglasses
-                       </a>
-                   </li>
                </ul>
            </div>
 
@@ -512,56 +394,21 @@
                    </li>
 
                    <li class="p-b-9">
-                       <a href="#" class="s-text7">
+                       <a href="{{url('about')}}" class="s-text7">
                            About Us
                        </a>
                    </li>
 
                    <li class="p-b-9">
-                       <a href="#" class="s-text7">
+                       <a href="{{url('contact')}}" class="s-text7">
                            Contact Us
                        </a>
                    </li>
 
-                   <li class="p-b-9">
-                       <a href="#" class="s-text7">
-                           Returns
-                       </a>
-                   </li>
                </ul>
            </div>
 
-           <div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
-               <h4 class="s-text12 p-b-30">
-                   Help
-               </h4>
 
-               <ul>
-                   <li class="p-b-9">
-                       <a href="#" class="s-text7">
-                           Track Order
-                       </a>
-                   </li>
-
-                   <li class="p-b-9">
-                       <a href="#" class="s-text7">
-                           Returns
-                       </a>
-                   </li>
-
-                   <li class="p-b-9">
-                       <a href="#" class="s-text7">
-                           Shipping
-                       </a>
-                   </li>
-
-                   <li class="p-b-9">
-                       <a href="#" class="s-text7">
-                           FAQs
-                       </a>
-                   </li>
-               </ul>
-           </div>
 
            <div class="w-size8 p-t-30 p-l-15 p-r-15 respon3">
                <h4 class="s-text12 p-b-30">

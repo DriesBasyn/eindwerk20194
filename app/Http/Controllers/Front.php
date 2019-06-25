@@ -23,6 +23,7 @@ class Front extends Controller
         $this->categories=Category::all('name');
         $this->products=Product::all();
 
+
     }
 
     public function index(){
