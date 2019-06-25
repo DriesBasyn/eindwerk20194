@@ -122,12 +122,8 @@
 						fashe@example.com
 					</span>
 
-                   <div class="topbar-language rs1-select2">
-                       <select class="selection-1" name="time">
-                           <option>USD</option>
-                           <option>EUR</option>
-                       </select>
-                   </div>
+
+
                </div>
            </div>
 
@@ -180,7 +176,22 @@
                <!-- Header Icon -->
                <div class="header-icons">
                    <a href="#" class="header-wrapicon1 dis-block">
-                       <img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+
+                       @if (Auth::guest())
+                           <a href="{{ url('/login') }}"> Login |</a>
+                            <span> </span>
+                           <a href="{{ url('/register') }}"> | Register </a>
+                       @else
+                           <li class="dropdown">
+                               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                   {{ Auth::user()->name }} <span class="caret"></span>
+                               </a>
+
+                               <ul class="dropdown-menu" role="menu">
+                                   <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                               </ul>
+                           </li>
+                       @endif
                    </a>
 
                    <span class="linedivide1"></span>
@@ -248,7 +259,7 @@
                            <div class="header-cart-buttons">
                                <div class="header-cart-wrapbtn">
                                    <!-- Button -->
-                                   <a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+                                   <a href="{{url('cart')}}" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
                                        View Cart
                                    </a>
                                </div>

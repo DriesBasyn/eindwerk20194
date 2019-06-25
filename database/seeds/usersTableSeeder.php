@@ -12,7 +12,7 @@ class usersTableSeeder extends Seeder
     public function run()
     {
         //
-        factory('App\User',10)->create();
+
         DB::table('users')->insert([
             'role_id'=>1,
             'name'=>'admin',

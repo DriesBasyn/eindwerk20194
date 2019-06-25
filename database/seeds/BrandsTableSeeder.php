@@ -12,6 +12,12 @@ class BrandsTableSeeder extends Seeder
     public function run()
     {
         //
-        factory('App\Brand',10)->create();
+        DB::table('brands')->insert(['name' =>'Ball']);
+        DB::table('brands')->insert(['name' =>'Braun']);
+        DB::table('brands')->insert(['name' =>'Calvin Klein']);
+        DB::table('brands')->insert(['name' =>'Casio']);
+        DB::table('brands')->insert(['name' =>'DKYN']);
+        DB::table('brands')->insert(['name' =>'Diesel']);
+        DB::table('brands')->insert(['name' =>'Ebel']);
     }
 }

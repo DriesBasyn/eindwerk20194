@@ -15,7 +15,10 @@ class CreateBrandsTable extends Migration
     {
         Schema::create('brands', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name')->unique();
             $table->timestamps();
+            $table->string('created_at_ip')->nullable();
+            $table->string('updated_at_ip')->nullable();
         });
     }
 

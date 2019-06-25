@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+/*use Illuminate\Http\Request;*/
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Redirect;
 use App\Brand;
 use App\Category;
 use App\Product;
+use Cart;
+use DB;
+use Braintree;
 
 class Front extends Controller
 {
@@ -23,7 +28,7 @@ class Front extends Controller
     public function index(){
         $brands = Brand::all();
         $categories = Category::all(array('name'));
-        $products = Product::paginate(2);
+        $products = Product::all();
         return view('index',compact('brands','categories','products'));
     }
     public function index1(){
@@ -50,7 +55,7 @@ class Front extends Controller
         return view('contact',array('title' => 'Welcome', 'description'=>'lorem ipsum', 'page'=>'contact_us'));
     }
     public function product(){
-
+        $products = Product::paginate(5);
         return view('product',array('title' => 'Products listing', 'description'=>'lorem ipsum', 'page'=>'products',
             'brands'=>$this->brands, 'categories' => $this->categories, 'products'=>$this->products));
     }
@@ -58,6 +63,7 @@ class Front extends Controller
 
     public function product_details($id){
         $product = Product::find($id);
+   /*     dd($product);*/
         return view('product-detail' ,array('product' => $product,'title'=>$product->name,
             'description'=>$product->description, 'page'=>'products',
             'brands'=>$this->brands, 'categories' => $this->categories, 'products'=>$this->products));
@@ -83,7 +89,7 @@ class Front extends Controller
         );
     }
 
-    public function cart(){
+    public  function cart(){
         if(Request::isMethod('post')){
             $product_id = Request::get('product_id');
             $product = Product::find($product_id);

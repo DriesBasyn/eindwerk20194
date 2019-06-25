@@ -12,6 +12,11 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         //
-        factory('App\Category',15)->create();
+            DB::table('categories')->insert(['name' =>'Woman']);
+            DB::table('categories')->insert(['name' =>'Men']);
+            DB::table('categories')->insert(['name' =>'Pocket']);
+            DB::table('categories')->insert(['name' =>'Sport']);
+
+
     }
 }
