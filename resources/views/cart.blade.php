@@ -96,48 +96,93 @@
 					</span>
 
 					<span class="m-text21 w-size20 w-full-sm">
-						${{$cart::subTotal()}}
+						${{Cart::subTotal()}}
 					</span>
 				</div>
 
-				<div class="size15 trans-0-4">
+				<div class=" trans-0-4">
 
 					@if(!Auth::check())
 
-						<div class="row">
-							<div class="col-12">
-								{!! Form::open(['method'=>'POST', 'action'=> 'AdminUsersController@store','files'=>true]) !!}
-								<div class="form-group">
-									{!! Form::label('name', 'Name:') !!}
-									{!! Form::text('name', null, ['class'=>'form-control'])!!}
+						<div class="panel-heading">Login</div>
+						<div class="panel-body">
+							<form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+								{{ csrf_field() }}
+
+								<div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+									<label for="email" class="col-md-4 control-label">E-Mail Address</label>
+
+									<div class="col-md-6">
+										<input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
+
+										@if ($errors->has('email'))
+											<span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+										@endif
+									</div>
 								</div>
-								<div class="form-group">
-									{!! Form::label('email', 'Email:') !!}
-									{!! Form::email('email', null, ['class'=>'form-control'])!!}
+
+								<div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+									<label for="password" class="col-md-4 control-label">Password</label>
+
+									<div class="col-md-6">
+										<input id="password" type="password" class="form-control" name="password">
+
+										@if ($errors->has('password'))
+											<span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+										@endif
+									</div>
 								</div>
 
 								<div class="form-group">
-									{!! Form::label('password', 'Password:') !!}
-									{!! Form::password('password', ['class'=>'form-control'])!!}
+									<div class="col-md-6 col-md-offset-4">
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" name="remember"> Remember Me
+											</label>
+										</div>
+									</div>
 								</div>
 
 								<div class="form-group">
-									{!! Form::submit('Create User', ['class'=>'btn btn-primary']) !!}
-								</div>
+									<div class="col-md-6 col-md-offset-4">
+										<button type="submit" class="btn btn-primary">
+											<i class="fa fa-btn fa-sign-in"></i> Login
+										</button>
 
-								{!! Form::close() !!}
-							</div>
+										<a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
+									</div>
+								</div>
+							</form>
+						</div>
 						</div>
 					@else
-						<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-							Proceed to Checkout
-						</button>
+
+						<div class="content">
+							<form method="post" id="payment-form" action="#">
+								@csrf
+								<section>
+									<label for="amount">
+										<span class="input-label">Amount</span>
+										<div class="input-wrapper amount-wrapper">
+											<input id="amount" name="amount" type="tel" min="1" placeholder="Amount"
+												   value="{{Cart::subTotal()}}">
+										</div>
+									</label>
+									<div class="bt-drop-in-wrapper">
+										<div id="bt-dropin"></div>
+									</div>
+								</section>
+								<input id="nonce" name="payment_method_nonce" type="hidden" />
+							</form>
+							</div>
+				</div>
 				@endif
 
-					<!-- Button -->
-					<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
-						Proceed to Checkout
-					</button>
+
 				</div>
 			</div>
 		</div>
