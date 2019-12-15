@@ -147,7 +147,7 @@
 							<!-- Block2 -->
 							<div class="block2">
 								<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-									<img src="{{asset('images/item-02.jpg')}}" alt="IMG-PRODUCT">
+									<img src="{{$product->photo ? asset($product->photo->file): asset('images/item-02.jpg')}}" alt="{{$product->name}}">
 
 									<div class="block2-overlay trans-0-4">
 										<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">

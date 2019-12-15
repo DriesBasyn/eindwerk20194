@@ -54,7 +54,7 @@
         }
     </style>
 </head>
-<body id="app-layout" class="animsition">
+<body id="app-layout" {{--class="animsition--}}>
    {{-- <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
@@ -130,7 +130,7 @@
            <div class="wrap_header">
                <!-- Logo -->
                <a href="{{url('/')}}" class="logo">
-                   <img src="images/icons/logo.png" alt="IMG-LOGO">
+                   <img src="{{asset('images/icons/logo.png')}}" alt="IMG-LOGO">
                </a>
 
                <!-- Menu -->
@@ -193,7 +193,7 @@
                    <span class="linedivide1"></span>
 
                    <div class="header-wrapicon2">
-                       <img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+                       <img src="{{asset('images/icons/icon-header-02.png')}}" class="header-icon1 js-show-header-dropdown" alt="ICON">
 
 
                        <!-- Header cart noti -->
@@ -225,8 +225,8 @@
        <!-- Header Mobile -->
        <div class="wrap_header_mobile">
            <!-- Logo moblie -->
-           <a href="index.html" class="logo-mobile">
-               <img src="images/icons/logo.png" alt="IMG-LOGO">
+           <a href="/" class="logo-mobile">
+               <img src="{{asset('images/icons/logo.png')}}" alt="IMG-LOGO">
            </a>
 
            <!-- Button show menu -->
@@ -234,13 +234,13 @@
                <!-- Header Icon mobile -->
                <div class="header-icons-mobile">
                    <a href="#" class="header-wrapicon1 dis-block">
-                       <img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
+                       <img src="{{asset('images/icons/icon-header-01.png')}}" class="header-icon1" alt="ICON">
                    </a>
 
                    <span class="linedivide2"></span>
 
                    <div class="header-wrapicon2">
-                       <img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
+                       <img src="{{asset('images/icons/icon-header-02.png')}}" class="header-icon1 js-show-header-dropdown" alt="ICON">
 
 
                        <!-- Header cart noti -->
@@ -370,13 +370,13 @@
                </h4>
 
                <ul>
-                   @foreach($categories as $category)
+                  {{-- @foreach($categories as $category)
                    <li class="p-b-9">
                        <a href="#" class="s-text7">
                            {{$category->name}}
                        </a>
-                   </li>
-                       @endforeach
+                   </li>--}}
+                {{--       @endforeach--}}
 
                </ul>
            </div>
@@ -514,7 +514,7 @@
    </script>
 
    <!--===============================================================================================-->
-   <script src="js/main.js"></script>
+   <script src="{{asset('js/main.js')}}"></script>
 
 
    <!-- JavaScripts -->

@@ -18,7 +18,8 @@ class CreateProductsTable extends Migration
             $table->string('name')/*->unique()*/;
             $table->string('title');
 
-            $table->decimal('price');
+            $table->decimal('price')->default(0);
+            $table->string('description')->nullable();
             $table->integer('category_id')->nullable();
             $table->integer('brand_id')->nullable();
             $table->timestamps();

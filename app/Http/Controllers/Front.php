@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Brand;
 use App\Category;
 use App\Product;
+
 use Cart;
 use DB;
 use Braintree;
@@ -17,11 +18,13 @@ class Front extends Controller
     var $brands;
     var $categories;
     var $products;
+    var $cart;
     public function __construct()
     {
         $this->brands=Brand::all('name');
         $this->categories=Category::all('name');
         $this->products=Product::all();
+        $this->cart = Cart::content();
 
 
     }
@@ -30,14 +33,9 @@ class Front extends Controller
         $brands = Brand::all();
         $categories = Category::all(array('name'));
         $products = Product::all();
-        return view('index',compact('brands','categories','products'));
+        return view('index',compact('brands','categories','products','count','cart'));
     }
-    public function index1(){
-        return view('home-02', compact('brands','categories','products'));
-    }
-    public function index2(){
-        return view('home-03', compact('brands','categories','products'));
-    }
+
     public function about(){
         return view('about');
     }
@@ -53,23 +51,35 @@ class Front extends Controller
         }*/
 
     public function contact(){
-        return view('contact',array('title' => 'Welcome', 'description'=>'lorem ipsum', 'page'=>'contact_us'));
+        return view('productdetail');
+/*        return view('contact',array('title' => 'Welcome', 'description'=>'lorem ipsum', 'page'=>'contact_us'));*/
     }
     public function product(){
-        $products = Product::paginate(5);
-        return view('product',array('title' => 'Products listing', 'description'=>'lorem ipsum', 'page'=>'products',
+
+        return view('product',compact('cart'),array('title' => 'Products listing',
+            'description'=>'lorem ipsum', 'page'=>'products',
             'brands'=>$this->brands, 'categories' => $this->categories, 'products'=>$this->products));
     }
 
 
-    public function product_details($id){
+    public function productdetails($id){
         $product = Product::find($id);
-   /*     dd($product);*/
-        return view('product-detail' ,array('product' => $product,'title'=>$product->name,
-            'description'=>$product->description, 'page'=>'products',
-            'brands'=>$this->brands, 'categories' => $this->categories, 'products'=>$this->products));
+        return view('productdetail' ,compact('cart'),array(
+            'product' => $product ,'title'=>$product->name,
+            'description'=>$product->description,
+            'page'=>'products',
+            'brands'=>$this->brands,
+            'categories' => $this->categories,
+            'products'=>$this->products));
     }
 
+    public function my_account($id){
+        $user = User::where('id',$id)->first();
+        $orders = Order::where('user_id',$id)->get();
+        $products = Product::all();
+
+        return view('my_account',compact('categories','orders','products'),array('title'=>$user->name));
+    }
 
     public function login(){
         return view('login',array('title' => 'Welcome', 'description'=>'lorem ipsum', 'page'=>'home'));
@@ -78,7 +88,7 @@ class Front extends Controller
         return view('logout',array('title' => 'Welcome', 'description'=>'lorem ipsum', 'page'=>'home'));
     }
 
-    public function welcome(){
+   /* public function welcome(){
         $gateway = new Braintree\Gateway([
             'environment' => config('services.braintree.environment'),
             'merchantId' => config('services.braintree.merchantId'),
@@ -88,7 +98,7 @@ class Front extends Controller
         $token = $gateway->ClientToken()->generate();
         return view('cart',compact('token','cart')
         );
-    }
+    }*/
 
     public  function cart(){
         if(Request::isMethod('post')){

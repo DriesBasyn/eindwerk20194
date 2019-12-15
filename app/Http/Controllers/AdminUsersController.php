@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Photo;
@@ -48,6 +49,12 @@ class AdminUsersController extends Controller
         } else{
             $input = $request->all();
             $input['password'] = Hash::make($request['password']);
+        }
+        if($file = $request->file('photo_id')){
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images', $name);
+            $photo = Photo::create(['file'=>$name]);
+            $input['photo_id'] = $photo->id;
         }
         $input['password'] = Hash::make($request['password']);
         User::create($input);
@@ -96,6 +103,12 @@ class AdminUsersController extends Controller
         } else{
             $input = $request->all();
             $input['password'] = Hash::make($request['password']);
+        }
+        if($file = $request->file('photo_id')){
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images', $name);
+            $photo = Photo::create(['file'=>$name]);
+            $input['photo_id'] = $photo->id;
         }
         $user->update($input);
         return redirect('/users');

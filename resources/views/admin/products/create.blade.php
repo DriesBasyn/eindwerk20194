@@ -44,6 +44,7 @@
 
 
             <div class="form-group">
+                <button class="btn btn-primary" type="submit">SUBMIT</button>
                 {!! Form::submit('Create Product', ['class'=>'btn btn-danger col-md-12']) !!}
             </div>
             {!! Form::close() !!}

@@ -67,6 +67,8 @@ class RolesController extends Controller
     public function edit($id)
     {
         //
+        $role = Role::findOrFail($id); //ophalen van alle velden uit DB.
+        return view('admin.roles.edit', compact('role'));
     }
 
     /**
@@ -79,6 +81,10 @@ class RolesController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $role = Role::findOrFail($id);
+        $name = Input::get('name');
+        $role->update(['name'=> $name]);
+        return redirect('/roles');
     }
 
     /**
@@ -90,5 +96,9 @@ class RolesController extends Controller
     public function destroy($id)
     {
         //
+        $role = Role::findOrFail($id);
+        $role->delete();
+
+        return redirect('/roles');
     }
 }

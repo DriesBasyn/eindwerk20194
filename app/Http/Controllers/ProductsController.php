@@ -20,9 +20,11 @@ class ProductsController extends Controller
     public function index()
     {
         //
-        $brands = Brand::lists('name','id')->all();
-        $categories = Category::lists('name','id')->all();
-        $products=Product::all();
+        $products=Product::orderBy('id', 'desc')->paginate(15);
+
+        $brands = Brand::pluck('name','id')->all();
+        $categories = Category::pluck('name','id')->all();
+        /*$products=Product::all();*/
         /* dd($products);*/
         return view('admin.products.index',compact('products','brands','categories'));
     }
@@ -35,8 +37,8 @@ class ProductsController extends Controller
     public function create()
     {
         //
-        $categories = Category::lists('name','id')->all();
-        $brands = Brand::lists('name','id')->all();
+        $categories = Category::pluck('name','id')->all();
+        $brands = Brand::pluck('name','id')->all();
         return view('admin.products.create', compact( 'categories','brands'));
 
     }
@@ -50,17 +52,15 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         //
-        $input=$request->all();// haalt alle velden on van het formulier
+        $input=$request->all();// haalt alle velden op
 
         if($file=$request->file('photo_id')){
-            $name=time().$file->getClientOriginalName();//samenstelling bestandsnaam
-            $file->move('images',$name);//het verplatsen naar de map images
-            $photo=Photo::create(['file'=>$name]);//id de tabel fotot ene id aanmaken
+            $name=time().$file->getClientOriginalName();
+            $file->move('images',$name);
+            $photo=Photo::create(['file'=>$name]);
             $input['photo_id']=$photo->id;
         }
-        Product::create($input);
-        /*$product =new Product();
-        $product->create($input);*/
+        Product::create(['name'=>$input["name"],'title'=>$input["title"],'description'=>$input["description"],'price'=>$input["Price"],'category_id'=>$input["category_id"],'brand_id'=>$input["brand_id"],'photo_id'=>$input["photo_id"]]);
         return redirect('products');
     }
 
@@ -86,8 +86,8 @@ class ProductsController extends Controller
     {
         //
         $product = Product::findOrFail($id);
-        $categories = Category::lists('name','id')->all();
-        $brands = Brand::lists('name','id')->all();
+        $categories = Category::pluck('name','id')->all();
+        $brands = Brand::pluck('name','id')->all();
         return view('admin.products.edit', compact('product', 'categories','brands'));
 
     }

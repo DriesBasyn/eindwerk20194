@@ -97,5 +97,9 @@ class CategoriesController extends Controller
     public function destroy($id)
     {
         //
+        $Category = Category::findOrFail($id);
+        $Category->delete();
+
+        return redirect('/categories');
     }
 }

@@ -196,7 +196,7 @@
 							</div>
 
 							<div class="block2-txt p-t-20">
-								<a href="{{url('product/details/$product->id')}}" class="block2-name dis-block s-text3 p-b-5">
+								<a href="{{url('product/details/'.$product->id)}}" class="block2-name dis-block s-text3 p-b-5">
 									{{$product->name}}
 								</a>
 

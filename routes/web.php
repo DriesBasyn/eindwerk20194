@@ -18,15 +18,17 @@ Route::get('/login', 'Front@login')->name('login');
 Route::get('/logout', 'Front@logout')->name('logout');
 /*front*/
 Route::get('/','Front@index');
-Route::get('index1','Front@index1');
-Route::get('index2','Front@index2');
+Route::get('/my_account/{id}','Front@my_account');
+/*Route::get('index1','Front@index1');
+Route::get('index2','Front@index2');*/
 Route::get('about','Front@about')->name('about');
 Route::get('blog','Front@blog')->name('blog');
 Route::get('blog/post/{id}','Front@blog_post');
 Route::get('contact','Front@contact')->name('contact');
 /*product*/
 Route::get('product','Front@product');
-Route::get('product/details/{id}','Front@product_details');
+Route::get('product/details/{id}','Front@productdetails');
+Route::get('product/detail/{id}','Front@productdetails2');
 /*cart*/
 Route::get('/checkout', 'Front@checkout');
 Route::post('/checkout', function(Request $request){
@@ -90,3 +92,6 @@ Route::resource('/roles','RolesController');
 Route::resource('/products','ProductsController');
 /*home*/
 Route::get('/home', 'HomeController@index');
+
+Route::resource('/orders','OrdersController');
+
