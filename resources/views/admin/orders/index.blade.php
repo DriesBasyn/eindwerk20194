@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 @section('content')
 
-<table class="table">
+<table class="table">git basename
     <thead>
     <tr>
         <th scope="col">id</th>
@@ -18,7 +18,7 @@
     <tr>
         <th>{{$order->id}}</th>
         <td>{{$user->name.' '.$user->firstname}}</td>
-        <td>{{$order->transaction_id}}</td>
+        <td>{{$order->transaction_id}}</td>git
         <td>&dollar;{{$order->price}}</td>
         <td>{{$order->created_at}}</td>
     </tr>
@@ -27,3 +27,4 @@
     </tbody>
 </table>
 @endsection
+

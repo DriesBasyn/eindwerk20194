@@ -1,8 +1,13 @@
 <?php
 
 use App\Category;
+use App\Http\Controllers\Front;
+use App\Order;
+use App\Product;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Cart;
+use Illuminate\Support\Facades\Input;
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -28,7 +33,8 @@ Route::get('contact','Front@contact')->name('contact');
 /*product*/
 Route::get('product','Front@product');
 Route::get('product/details/{id}','Front@productdetails');
-Route::get('product/detail/{id}','Front@productdetails2');
+
+
 /*cart*/
 Route::get('/checkout', 'Front@checkout');
 Route::post('/checkout', function(Request $request){
@@ -65,6 +71,10 @@ Route::post('/checkout', function(Request $request){
     if ($result->success) {
         $transaction = $result->transaction;
         // header("Location: transaction.php?id=" . $transaction->id);
+        $this_user = Auth::user();
+        order::create(['user_id'=>$this_user->id,'transaction_id'=>$transaction->id,'price'=>$transaction->amount]);
+        $clear = new Front();
+        $clear->clear_cart();
         return back()->with('success_message', 'Transaction success. The ID is:'. $transaction->id);
     } else {
         $errorString = "";
@@ -83,6 +93,22 @@ Route::post('/cart','Front@cart');
 Route::get('/clear-cart', 'Front@clear_cart');
 /*search*/
 Route::get('/search/{query}','Front@search');
+Route::post('/search', function(){
+    $qry = Input::get('search');
+    //$filter = Input::get('filter');
+    $products = Product::all();
+
+    if(!empty($qry)){
+        $s_prod = Product::where('title','LIKE','%'.$qry.'%')->get();
+        if(count($s_prod)> 0){
+            return view('search',compact('products','qry','s_prod'))/*->withFilter($filter)*/;
+        }else{
+            return view('search',compact('products','qry'))->withMessage('geen producten gevonden');
+        }
+    }else{
+        return view('search',compact('products','qry'))->withMessage('geef een zoekterm in aub');
+    }
+});
 /*admin*/
 Route::get('/admin','DashboardController@index');
 Route::resource('/brands','BrandsController');

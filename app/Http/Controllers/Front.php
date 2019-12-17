@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 /*use Illuminate\Http\Request;*/
+
+
+
+
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Redirect;
 use App\Brand;
@@ -88,7 +92,7 @@ class Front extends Controller
         return view('logout',array('title' => 'Welcome', 'description'=>'lorem ipsum', 'page'=>'home'));
     }
 
-   /* public function welcome(){
+   public function welcome(){
         $gateway = new Braintree\Gateway([
             'environment' => config('services.braintree.environment'),
             'merchantId' => config('services.braintree.merchantId'),
@@ -98,7 +102,7 @@ class Front extends Controller
         $token = $gateway->ClientToken()->generate();
         return view('cart',compact('token','cart')
         );
-    }*/
+    }
 
     public  function cart(){
         if(Request::isMethod('post')){
@@ -137,7 +141,8 @@ class Front extends Controller
             'privateKey' => config('services.braintree.privateKey')
         ]);
         $token = $gateway->ClientToken()->generate();
-        return view('cart',compact('token','cart')
+        $categories = Category::all();
+        return view('cart',compact('token','cart','categories',array('title'=>'checkout'))
         );
     }
 

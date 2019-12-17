@@ -33,6 +33,7 @@
                 {!! Form::select('brand_id', [''=>'Choose options'] + $brands,null, ['class'=>'form-control']) !!}
             </div>
 
+
             {{--submit--}}
             <div class="form-group">
                 {!! Form::submit('Update Product', ['class'=>'btn btn-primary col-md-6']) !!}

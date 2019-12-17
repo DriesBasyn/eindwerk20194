@@ -60,7 +60,12 @@ class ProductsController extends Controller
             $photo=Photo::create(['file'=>$name]);
             $input['photo_id']=$photo->id;
         }
-        Product::create(['name'=>$input["name"],'title'=>$input["title"],'description'=>$input["description"],'price'=>$input["Price"],'category_id'=>$input["category_id"],'brand_id'=>$input["brand_id"],'photo_id'=>$input["photo_id"]]);
+        Product::create(['name'=>$input["name"],'title'=>$input["title"],
+            'description'=>$input["description"],
+            'price'=>$input["Price"],
+            'category_id'=>$input["category_id"],
+            'brand_id'=>$input["brand_id"],
+            'photo_id'=>$input["photo_id"]]);
         return redirect('products');
     }
 

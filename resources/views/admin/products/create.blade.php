@@ -1,6 +1,6 @@
 @extends('layouts.dashboard')
 @section('content')
-    <h1>Edit product</h1>
+    <h1>create product</h1>
     <div class="row">
 
         <div class="col-md-12">
@@ -33,9 +33,6 @@
                 {!! Form::select('brand_id', [''=>'Choose options'] + $brands,null, ['class'=>'form-control']) !!}
             </div>
             {{--photo--}}
-            <div class="form-group">
-                {!! Form::file('file',['class'=>'form-control']) !!}
-            </div>
 
             <div class="form-group">
                 {!! Form::label('photo_id', 'Photo:') !!}
@@ -44,7 +41,6 @@
 
 
             <div class="form-group">
-                <button class="btn btn-primary" type="submit">SUBMIT</button>
                 {!! Form::submit('Create Product', ['class'=>'btn btn-danger col-md-12']) !!}
             </div>
             {!! Form::close() !!}

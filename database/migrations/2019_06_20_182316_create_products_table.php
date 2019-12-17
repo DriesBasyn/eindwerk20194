@@ -22,6 +22,7 @@ class CreateProductsTable extends Migration
             $table->string('description')->nullable();
             $table->integer('category_id')->nullable();
             $table->integer('brand_id')->nullable();
+            $table->integer('photo_id')->nullable();
             $table->timestamps();
             $table->string('created_at_ip')->nullable();
             $table->string('updated_at_ip')->nullable();

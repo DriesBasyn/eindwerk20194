@@ -54,9 +54,9 @@
 								</div>
 							</td>
 							<td class="column-5">${{$item->subtotal}}</td>
-							<td class="cart_delete">
+							{{--<td class="cart_delete">
 								<a class="cart_quantity_delete" href="{{url("cart?product_id=$item->id&delete=1")}}"><i class="fa fa-times"></i></a>
-							</td>
+							</td>--}}
 						</tr>
 @endforeach
 
@@ -89,7 +89,7 @@
 
 				</div>
 
-				<!--  -->
+			{{--	<!--  -->
 				<div class="flex-w flex-sb-m p-t-26 p-b-30">
 					<span class="m-text22 w-size19 w-full-sm">
 						Total:
@@ -98,7 +98,7 @@
 					<span class="m-text21 w-size20 w-full-sm">
 						${{Cart::subTotal()}}
 					</span>
-				</div>
+				</div>--}}
 
 				<div class=" trans-0-4">
 
@@ -162,7 +162,7 @@
 					@else
 
 						<div class="content">
-							<form method="post" id="payment-form" action="#">
+							<form method="post" id="payment-form" action="{{url('checkout')}}">
 								@csrf
 								<section>
 									<label for="amount">
@@ -176,13 +176,15 @@
 										<div id="bt-dropin"></div>
 									</div>
 								</section>
-								<input id="nonce" name="payment_method_nonce" type="hidden" />
+
+								<div class="row d-flex justify-content-center">
+
+								</div><input id="nonce" name="payment_method_nonce" type="hidden" />
+								<button type="submit" class="btn btn-success btn-lg">Betalen</button>
+
 							</form>
-							</div>
-				</div>
-				@endif
-
-
+                        </div>
+                        @endif
 				</div>
 			</div>
 		</div>
